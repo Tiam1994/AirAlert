@@ -64,7 +64,20 @@ namespace Runtime.Controllers
 
 			if(Input.GetMouseButtonUp(1))
 			{
-				Debug.Log("Units go to target point");
+				if (_selectedUnits.Count == 0)
+				{
+					return;
+				}
+				else
+				{
+					Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+					Physics.Raycast(ray, out RaycastHit hit);
+
+					foreach (Unit unit in _selectedUnits)
+					{
+						unit.MoveToTargetPosition(SelectionUtility.MouseToTerrainPosition());
+					}
+				}
 			}
 		}
 

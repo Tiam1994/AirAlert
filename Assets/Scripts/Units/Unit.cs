@@ -1,3 +1,4 @@
+using UnityEngine.AI;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ namespace Runtime.Units
 	public class Unit : MonoBehaviour
 	{
 		[SerializeField] private SpriteRenderer _selectedSprite;
+		[SerializeField] private NavMeshAgent _agent;
 
 		public void Selected()
 		{
@@ -16,6 +18,11 @@ namespace Runtime.Units
 		public void Deselected()
 		{
 			_selectedSprite.enabled = false;
+		}
+
+		public void MoveToTargetPosition(Vector3 position)
+		{
+			_agent.SetDestination(position);
 		}
 	}
 }
